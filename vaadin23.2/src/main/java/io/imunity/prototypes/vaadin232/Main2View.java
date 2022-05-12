@@ -6,6 +6,9 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
+@PermitAll
 @Route("/ola")
 public class Main2View extends Composite<VerticalLayout> {
 

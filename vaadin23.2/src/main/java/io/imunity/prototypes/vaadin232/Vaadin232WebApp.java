@@ -27,7 +27,7 @@ public class Vaadin232WebApp {
         context.setBaseResource(Resource.newResource(webRootUri));
         context.setContextPath(contextPath);
         context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-            "(.*m2.*|" + resourceProvider232.getCurrentPath()  + ")");
+            "(.*m2.*|.*vaadin-security.*|" + resourceProvider232.getCurrentPath()  + ")");
         context.setConfigurationDiscovered(true);
 
         context.setConfigurations(new Configuration[]{

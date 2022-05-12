@@ -13,6 +13,7 @@
 		<module>vaadin23.2</module>
 		<module>vaadin8</module>
 		<module>runner</module>
+		<module>vaadin-security</module>
 	</modules>
 
 	<properties>
