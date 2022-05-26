@@ -19,7 +19,7 @@ public class ResetPasswordView extends Composite<VerticalLayout> {
 
 		Button button = new Button("Change password", e -> {
 			if(pass1.getValue().equals(pass2.getValue())) {
-				SecurityUtils.changePassword(login.getValue(), pass1.getValue());
+				ExampleMockAuthenticationService.changePassword(login.getValue(), pass1.getValue());
 				Notification.show("Password has changed");
 			}
 		});

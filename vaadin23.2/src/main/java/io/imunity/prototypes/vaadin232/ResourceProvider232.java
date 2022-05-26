@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
 public class ResourceProvider232 extends CustomResourceProvider {
 
 	public ResourceProvider232() throws URISyntaxException {
-		super("vaadin-common");
+		super("vaadin-common", "vaadin-security");
 	}
 
 }

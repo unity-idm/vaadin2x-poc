@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SecurityUtils {
+public class ExampleMockAuthenticationService {
 
 	private static final String LOGOUT_SUCCESS_URL = "/";
 	private static final Map<String, String> USERS = new HashMap<>(Map.of("admin", "admin", "ala", "ala"));

@@ -46,7 +46,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 
 	@Override
 	public void onComponentEvent(AbstractLogin.LoginEvent loginEvent) {
-		boolean authenticated = SecurityUtils.authenticate(
+		boolean authenticated = ExampleMockAuthenticationService.authenticate(
 			loginEvent.getUsername(), loginEvent.getPassword());
 		if (authenticated) {
 			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());

@@ -10,9 +10,9 @@ import javax.annotation.security.PermitAll;
 
 @PermitAll
 @Route("ala")
-public class Main2View extends Composite<VerticalLayout> {
+public class AlaView extends Composite<VerticalLayout> {
 
-    public Main2View() {
+    public AlaView() {
         getContent().add(
                 new Button("Is Ala alive?",
                         e -> Notification.show("Ala!"))
