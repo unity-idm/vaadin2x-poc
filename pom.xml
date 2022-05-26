@@ -13,6 +13,8 @@
 		<module>vaadin23.2</module>
 		<module>vaadin8</module>
 		<module>runner</module>
+		<module>vaadin-common</module>
+		<module>vaadin-adds</module>
 	</modules>
 
 	<properties>
