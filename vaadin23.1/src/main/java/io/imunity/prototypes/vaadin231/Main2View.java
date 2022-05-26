@@ -14,7 +14,7 @@ public class Main2View extends Composite<VerticalLayout> {
 
     public Main2View() {
         getContent().add(
-                new Button("Does Ala alive?",
+                new Button("Is Ala alive?",
                         e -> Notification.show("Ala!"))
         );
     }
