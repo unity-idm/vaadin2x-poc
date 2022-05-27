@@ -13,6 +13,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -28,9 +29,8 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 		ServletException {
 		Request rq = (Request) request;
-		boolean authenticated = ofNullable(rq.getSession())
-			.flatMap(x -> ofNullable(x.getAttribute("authenticated")))
-			.map(x -> (boolean) x)
+		boolean authenticated = ofNullable(rq.getSession().getAttribute("authenticated"))
+			.map(attribute -> (boolean) attribute)
 			.orElse(false);
 		if(authenticated && rq.getUserPrincipal() == null){
 			UserAuthentication userAuthentication = new UserAuthentication("basic", new DefaultUserIdentity(

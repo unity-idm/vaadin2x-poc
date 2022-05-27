@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>vaadin-adds</artifactId>
+	<artifactId>vaadin-elements</artifactId>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>

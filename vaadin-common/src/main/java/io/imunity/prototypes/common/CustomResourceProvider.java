@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -82,7 +81,7 @@ public abstract class CustomResourceProvider implements ResourceProvider {
 
 	@Override
 	public InputStream getClientResourceAsStream(String path) throws IOException {
-		CachedStreamData cached = this.cache.computeIfAbsent(path, this::getCachedStreamData);
+		CachedStreamData cached = this.cache.computeIfAbsent(path, this::loadResourceStreamAsCachedData);
 
 		IOException exception = cached.exception;
 		if (exception == null) {
@@ -92,7 +91,7 @@ public abstract class CustomResourceProvider implements ResourceProvider {
 		}
 	}
 
-	private CachedStreamData getCachedStreamData(String key) {
+	private CachedStreamData loadResourceStreamAsCachedData(String key) {
 		URL url = this.getClientResource(key);
 		try(InputStream stream = url.openStream()) {
 			CachedStreamData cachedStreamData;

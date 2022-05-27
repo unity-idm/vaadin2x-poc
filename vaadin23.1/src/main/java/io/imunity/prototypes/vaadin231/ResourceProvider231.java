@@ -8,6 +8,6 @@ import java.net.URISyntaxException;
 public class ResourceProvider231 extends CustomResourceProvider {
 
 	public ResourceProvider231() throws URISyntaxException {
-		super("vaadin-adds", "vaadin-common", "vaadin-security");
+		super("vaadin-elements", "vaadin-common", "vaadin-security");
 	}
 }

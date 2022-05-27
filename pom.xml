@@ -15,7 +15,7 @@
 		<module>runner</module>
 		<module>vaadin-security</module>
 		<module>vaadin-common</module>
-		<module>vaadin-adds</module>
+		<module>vaadin-elements</module>
 	</modules>
 
 	<properties>
