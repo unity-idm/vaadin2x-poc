@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -29,9 +30,12 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 		ServletException {
 		Request rq = (Request) request;
+
 		boolean authenticated = ofNullable(rq.getSession().getAttribute("authenticated"))
 			.map(attribute -> (boolean) attribute)
 			.orElse(false);
+		if(!authenticated)
+			((HttpServletResponse)response).addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		if(authenticated && rq.getUserPrincipal() == null){
 			UserAuthentication userAuthentication = new UserAuthentication("basic", new DefaultUserIdentity(
 				new Subject(),

@@ -1,6 +1,7 @@
 package io.imunity.prototypes.security;
 
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.WrappedSession;
@@ -10,8 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ExampleMockAuthenticationService {
-
-	private static final String LOGOUT_SUCCESS_URL = "/";
 	private static final Map<String, String> USERS = new HashMap<>(Map.of("admin", "admin", "ala", "ala"));
 
 	public static boolean authenticate(String username, String password) {
@@ -28,6 +27,11 @@ public class ExampleMockAuthenticationService {
 		return false;
 	}
 
+	public static boolean isAuthenticated() {
+		Boolean authenticated = (Boolean)VaadinSession.getCurrent().getSession().getAttribute("authenticated");
+		return authenticated != null && authenticated;
+	}
+
 	public static void changePassword(String username, String password) {
 		if (USERS.get(username) != null)
 			USERS.put(username, password);
@@ -35,6 +39,6 @@ public class ExampleMockAuthenticationService {
 
 	public static void logout() {
 		VaadinSession.getCurrent().getSession().invalidate();
-		UI.getCurrent().getPage().setLocation(LOGOUT_SUCCESS_URL);
+		UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
 	}
 }

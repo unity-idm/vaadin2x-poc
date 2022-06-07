@@ -21,6 +21,11 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 	private LoginForm login = new LoginForm();
 
 	public LoginView() {
+		if(ExampleMockAuthenticationService.isAuthenticated()) {
+			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
+			return;
+		}
+
 		addClassName("login-view");
 		setSizeFull();
 
@@ -49,9 +54,13 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 		boolean authenticated = ExampleMockAuthenticationService.authenticate(
 			loginEvent.getUsername(), loginEvent.getPassword());
 		if (authenticated) {
-			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
+			redirectToMainView();
 		} else {
 			login.setError(true);
 		}
+	}
+
+	private void redirectToMainView() {
+		UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
 	}
 }

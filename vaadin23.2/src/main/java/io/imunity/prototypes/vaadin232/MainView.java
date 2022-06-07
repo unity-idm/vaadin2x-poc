@@ -6,6 +6,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 
 import javax.annotation.security.PermitAll;
 
@@ -15,8 +16,10 @@ import javax.annotation.security.PermitAll;
 public class MainView extends Composite<VerticalLayout> {
 
     public MainView() {
+        VaadinSession current = VaadinSession.getCurrent();
         getContent().add(
-                new Button("Does it work?", e -> Notification.show("Yes, it works 232!"))
+                new Button("Does it work?", e -> Notification.show("Yes, it works 232!")),
+                new Button("LOGOUT", e -> current.getSession().invalidate())
         );
     }
 
