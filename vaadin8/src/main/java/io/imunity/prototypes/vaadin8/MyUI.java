@@ -2,18 +2,15 @@ package io.imunity.prototypes.vaadin8;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.risto.stepper.IntStepper;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -29,7 +26,7 @@ public class MyUI extends UI {
 			"This is the description",
 			Notification.Type.HUMANIZED_MESSAGE));
 
-		HorizontalLayout main = new HorizontalLayout(button);
+		HorizontalLayout main = new HorizontalLayout(button, new IntStepper());
 		main.setSizeFull();
 
 		layout.addComponents(main);

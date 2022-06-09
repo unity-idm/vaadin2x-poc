@@ -20,7 +20,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
-			<version>${vaadin.new.version}</version>
 		</dependency>
 	</dependencies>
 

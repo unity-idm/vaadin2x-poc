@@ -3,40 +3,37 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<groupId>io.imunity.prototypes</groupId>
 		<artifactId>vaadin-2x-poc</artifactId>
+		<groupId>io.imunity.prototypes</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>vaadin23.1</artifactId>
+	<artifactId>vaadin-widgets</artifactId>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<vaadin.productionMode>true</vaadin.productionMode>
 	</properties>
-	<packaging>jar</packaging>
 
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-core</artifactId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<version>8.15.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.imunity.prototypes</groupId>
-			<artifactId>vaadin-common</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>io.imunity.prototypes</groupId>
-			<artifactId>vaadin-elements</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>stepper</artifactId>
+			<version>2.4.0</version>
 		</dependency>
 	</dependencies>
 
@@ -45,12 +42,12 @@
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
-				<version>${vaadin23.version}</version>
+				<version>${vaadin8.version}</version>
 				<executions>
 					<execution>
 						<goals>
-							<goal>prepare-frontend</goal>
-							<goal>build-frontend</goal>
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>

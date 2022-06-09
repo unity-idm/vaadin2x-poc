@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
-			<version>${vaadin.new.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.imunity.prototypes</groupId>
@@ -40,7 +39,7 @@
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
-				<version>${vaadin.new.version}</version>
+				<version>${vaadin23.version}</version>
 				<executions>
 					<execution>
 						<goals>

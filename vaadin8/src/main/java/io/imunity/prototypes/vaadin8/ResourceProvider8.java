@@ -15,6 +15,6 @@ import java.util.stream.StreamSupport;
 public class ResourceProvider8 extends CustomResourceProvider {
 
 	public ResourceProvider8() throws URISyntaxException {
-		super("vaadin-common");
+		super("vaadin-common", "vaadin-widgets");
 	}
 }

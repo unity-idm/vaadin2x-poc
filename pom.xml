@@ -16,6 +16,7 @@
 		<module>vaadin-security</module>
 		<module>vaadin-common</module>
 		<module>vaadin-elements</module>
+		<module>vaadin-widgets</module>
 	</modules>
 
 	<properties>
@@ -25,8 +26,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Dependencies -->
-		<vaadin.new.version>23.0.8</vaadin.new.version>
-		<vaadin.old.version>8.15.1</vaadin.old.version>
+		<vaadin8.version>8.15.1</vaadin8.version>
+		<vaadin23.version>23.0.8</vaadin23.version>
 		<jetty.version>9.4.44.v20210927</jetty.version>
 	</properties>
 
@@ -35,14 +36,14 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-bom</artifactId>
-				<version>${vaadin.new.version}</version>
+				<version>${vaadin23.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-bom</artifactId>
-				<version>${vaadin.old.version}</version>
+				<groupId>io.imunity.prototypes</groupId>
+				<artifactId>vaadin8-bom</artifactId>
+				<version>${vaadin8.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -75,6 +76,21 @@
 				<groupId>org.eclipse.jetty.websocket</groupId>
 				<artifactId>javax-websocket-server-impl</artifactId>
 				<version>${jetty.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.17.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.17.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>2.17.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
