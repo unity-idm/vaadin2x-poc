@@ -28,3 +28,10 @@
 /webpack.config.js
 /package-lock.json
 /package.json
+
+*/.classpath
+.classpath
+*/.project
+/.project
+/.settings
+*/.settings
