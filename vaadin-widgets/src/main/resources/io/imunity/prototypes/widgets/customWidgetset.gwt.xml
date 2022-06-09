@@ -5,7 +5,7 @@
 <module>
     
 
-	<generate-with class="pl.edu.icm.unity.webui.OptimizedConnectorBundleLoaderFactory">
+	<generate-with class="io.imunity.prototypes.widgets.OptimizedConnectorBundleLoaderFactory">
 	      <when-type-assignable class="com.vaadin.client.metadata.ConnectorBundleLoader" />
 	</generate-with>
 

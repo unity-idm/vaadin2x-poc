@@ -27,7 +27,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiler</artifactId>
-			<version>8.15.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
