@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>vaadin-widgets</artifactId>
+	<artifactId>vaadin8-widgets</artifactId>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -45,7 +45,6 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>update-widgetset</goal>
 							<goal>compile</goal>
 						</goals>
 					</execution>

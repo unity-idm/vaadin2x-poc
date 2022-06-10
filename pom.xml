@@ -16,7 +16,7 @@
 		<module>vaadin-security</module>
 		<module>vaadin-common</module>
 		<module>vaadin-elements</module>
-		<module>vaadin-widgets</module>
+		<module>vaadin8-widgets</module>
 	</modules>
 
 	<properties>
@@ -28,7 +28,8 @@
 		<!-- Dependencies -->
 		<vaadin8.version>8.15.1</vaadin8.version>
 		<vaadin23.version>23.0.8</vaadin23.version>
-		<jetty.version>9.4.44.v20210927</jetty.version>
+		<jetty.version>9.4.46.v20220331</jetty.version>
+		<log4j2.version>2.17.2</log4j2.version>
 	</properties>
 
 	<dependencyManagement>
@@ -80,17 +81,22 @@
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
-				<version>2.17.2</version>
+				<version>${log4j2.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-core</artifactId>
-				<version>2.17.2</version>
+				<version>${log4j2.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j-impl</artifactId>
-				<version>2.17.2</version>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jul</artifactId>
+				<version>${log4j2.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

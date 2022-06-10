@@ -15,6 +15,7 @@ import org.vaadin.risto.stepper.IntStepper;
 import javax.servlet.annotation.WebServlet;
 
 @Theme("mytheme")
+@Widgetset("io.imunity.prototypes.widgets.customWidgetset")
 public class MyUI extends UI {
 
 	@Override

@@ -31,8 +31,11 @@ $v-app-background-color: $v-background-color;
 
 @import "../valo/valo.scss";
 
+@import "../../addons/stepper/stepper.scss";
+
 @mixin mytheme {
   @include valo;
+  @include stepper;
 
   // Insert your own theme rules here
 }

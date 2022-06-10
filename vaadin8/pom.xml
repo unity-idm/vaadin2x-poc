@@ -46,7 +46,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.imunity.prototypes</groupId>
-			<artifactId>vaadin-widgets</artifactId>
+			<artifactId>vaadin8-widgets</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -60,9 +60,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>resources</goal>
-							<goal>update-widgetset</goal>
-							<goal>compile</goal>
+							<goal>compile-theme</goal>
 						</goals>
 					</execution>
 				</executions>

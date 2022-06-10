@@ -5,19 +5,25 @@ import com.vaadin.flow.server.startup.ServletContextListeners;
 import io.imunity.prototypes.vaadin231.ResourceProvider231;
 import io.imunity.prototypes.vaadin232.ResourceProvider232;
 import io.imunity.prototypes.vaadin8.ResourceProvider8;
+import org.apache.logging.log4j.jul.Log4jBridgeHandler;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
-import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
 
-import static io.imunity.prototypes.runner.WebAppContextFactory.*;
+import static io.imunity.prototypes.runner.WebAppContextFactory.getWebAppContext;
 
 class Runner {
+
+	static {
+		Log4jBridgeHandler.install(true, "", true);
+	}
+
 	public static void main(String... args) throws Exception {
+		Log4jBridgeHandler.install(true, "", true);
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 
 		ResourceProvider8 resourceProvider8 = new ResourceProvider8();

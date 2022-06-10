@@ -10,4 +10,6 @@
 	</generate-with>
 
     <inherits name="org.vaadin.risto.stepper.StepperWidgetset" />
+
+    <inherits name="com.vaadin.DefaultWidgetSet" />
 </module>
