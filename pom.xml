@@ -26,7 +26,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Dependencies -->
-		<vaadin8.version>8.15.1</vaadin8.version>
+		<vaadin8.version>8.14.3</vaadin8.version>
 		<vaadin23.version>23.0.8</vaadin23.version>
 		<jetty.version>9.4.46.v20220331</jetty.version>
 		<log4j2.version>2.17.2</log4j2.version>

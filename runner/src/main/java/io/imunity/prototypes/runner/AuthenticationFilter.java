@@ -32,7 +32,7 @@ public class AuthenticationFilter implements Filter {
 			.map(attribute -> (boolean) attribute)
 			.orElse(false);
 		if(!authenticated)
-			((HttpServletResponse)response).addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			blockRestoringLoginPageFromCashe((HttpServletResponse) response);
 		if(authenticated && rq.getUserPrincipal() == null){
 			UserAuthentication userAuthentication = new UserAuthentication("basic", new DefaultUserIdentity(
 				new Subject(),
@@ -42,6 +42,10 @@ public class AuthenticationFilter implements Filter {
 			rq.setAuthentication(userAuthentication);
 		}
 		chain.doFilter(request, response);
+	}
+
+	private void blockRestoringLoginPageFromCashe(HttpServletResponse response) {
+		response.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	}
 
 	@Override
