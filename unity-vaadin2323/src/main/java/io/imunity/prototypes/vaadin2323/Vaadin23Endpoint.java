@@ -51,6 +51,7 @@ public class Vaadin23Endpoint extends AbstractWebEndpoint implements WebAppEndpo
 	@Override
 	public synchronized void updateAuthenticationFlows(List<AuthenticationFlow> authenticators)
 	{
+		setAuthenticators(authenticators);
 	}
 
 	@Override
@@ -84,9 +85,9 @@ public class Vaadin23Endpoint extends AbstractWebEndpoint implements WebAppEndpo
 		return context;
 	}
 
-	static WebAppContext getWebAppContext(String contextPath, Set<String> classPathElements, URI webResourceRootUri,
-	                                      EventListener eventListener) throws Exception {
-		WebAppContext context = new WebAppContext();
+	WebAppContext getWebAppContext(String contextPath, Set<String> classPathElements, URI webResourceRootUri,
+	                               EventListener eventListener) throws Exception {
+		WebAppContext context = new Vaadin23WebAppContext(this::getAuthenticationFlows);
 		context.setBaseResource(Resource.newResource(webResourceRootUri));
 		context.setContextPath(contextPath);
 		context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", JarGetter.getJarsRegex(classPathElements));

@@ -11,7 +11,6 @@ import pl.edu.icm.unity.engine.api.endpoint.EndpointInstance;
 import pl.edu.icm.unity.engine.api.server.AdvertisedAddressProvider;
 import pl.edu.icm.unity.engine.api.server.NetworkServer;
 import pl.edu.icm.unity.types.endpoint.EndpointTypeDescription;
-import pl.edu.icm.unity.webui.authn.VaadinAuthentication;
 
 import java.util.Collections;
 
@@ -21,7 +20,7 @@ public class Vaadin23EndpointFactory implements EndpointFactory
 	public static final String NAME = "VAADIN23POC";
 	public static final String SERVLET_PATH = "/v23";
 	public static final EndpointTypeDescription TYPE = new EndpointTypeDescription(NAME,
-			"User-oriented account management web interface", VaadinAuthentication.NAME,
+			"User-oriented account management web interface", Vaadin23Authentication.NAME,
 			Collections.singletonMap(SERVLET_PATH, "User home endpoint"));
 
 	private final NetworkServer server;
