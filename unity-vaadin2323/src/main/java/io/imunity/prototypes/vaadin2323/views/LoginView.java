@@ -1,15 +1,17 @@
-package io.imunity.prototypes.vaadin2323;
+package io.imunity.prototypes.vaadin2323.views;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.dialog.DialogVariant;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinServlet;
-import com.vaadin.flow.server.VaadinSession;
+import io.imunity.prototypes.vaadin2323.Vaadin23Authentication;
+import io.imunity.prototypes.vaadin2323.Vaadin23WebAppContext;
 import pl.edu.icm.unity.engine.api.authn.AuthenticationResult;
 import pl.edu.icm.unity.engine.api.authn.remote.AuthenticationTriggeringContext;
 
@@ -17,20 +19,15 @@ import java.util.Collection;
 
 import static io.imunity.prototypes.vaadin2323.Vaadin23Authentication.Context.LOGIN;
 
-@Route("login")
-@PageTitle("Login")
-public class LoginView extends VerticalLayout {
-
+@Route(LoginView.LOGIN_VIEW_ROUTE)
+@PageTitle("Sign In")
+public class LoginView extends Composite<VerticalLayout> implements View {
+	public static final String LOGIN_VIEW_ROUTE = "signin";
 	public LoginView() {
-		addClassName("login-view");
-		setSizeFull();
-		setJustifyContentMode(JustifyContentMode.CENTER);
-		setAlignItems(Alignment.CENTER);
-
-		if(isAuthenticated()) {
-			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
-			return;
-		}
+		getContent().addClassName("login-view");
+		getContent().setSizeFull();
+		getContent().setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+		getContent().setAlignItems(FlexComponent.Alignment.CENTER);
 
 		AuthenticationCallback23 authenticationCallback23 = new AuthenticationCallback23();
 
@@ -40,16 +37,7 @@ public class LoginView extends VerticalLayout {
 		Collection<Vaadin23Authentication.VaadinAuthenticationUI> uiInstance = retrieval.createUIInstance(LOGIN);
 		uiInstance.forEach(x -> x.setAuthenticationCallback(authenticationCallback23));
 
-		add(uiInstance.stream().map(Vaadin23Authentication.VaadinAuthenticationUI::getComponent).toArray(Component[]::new));
-	}
-
-	private void redirectToMainView() {
-		UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
-	}
-
-	public boolean isAuthenticated() {
-		Boolean authenticated = (Boolean) VaadinSession.getCurrent().getSession().getAttribute("authenticated");
-		return authenticated != null && authenticated;
+		getContent().add(uiInstance.stream().map(Vaadin23Authentication.VaadinAuthenticationUI::getComponent).toArray(Component[]::new));
 	}
 
 	class AuthenticationCallback23 implements Vaadin23Authentication.AuthenticationCallback {
@@ -61,13 +49,13 @@ public class LoginView extends VerticalLayout {
 		@Override
 		public void onCompletedAuthentication(AuthenticationResult result) {
 			if (result.getStatus().equals(AuthenticationResult.Status.success)) {
-				redirectToMainView();
+				UI.getCurrent().getPage().reload();
 			}
 			if (result.getStatus().equals(AuthenticationResult.Status.deny)) {
 				Dialog dialog = new Dialog(new Label(result.getErrorResult().toString()));
 				dialog.addThemeVariants(DialogVariant.LUMO_NO_PADDING);
 				dialog.open();
-				add(dialog);
+				getContent().add(dialog);
 			}
 		}
 

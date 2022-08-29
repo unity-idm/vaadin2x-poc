@@ -12,7 +12,7 @@ import javax.annotation.security.PermitAll;
 
 @PermitAll
 @Route("ala")
-public class AlaView extends Composite<VerticalLayout> {
+public class AlaView extends Composite<VerticalLayout> implements View {
 
     public AlaView() {
         VaadinSession current = VaadinSession.getCurrent();

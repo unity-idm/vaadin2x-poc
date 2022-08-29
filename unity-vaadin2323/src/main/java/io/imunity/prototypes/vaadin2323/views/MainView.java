@@ -14,7 +14,7 @@ import javax.annotation.security.PermitAll;
 @PermitAll
 @Route
 @CssImport("./styles/view/main-view.css")
-public class MainView extends Composite<VerticalLayout> {
+public class MainView extends Composite<VerticalLayout> implements View {
 
     public MainView() {
         VaadinSession current = VaadinSession.getCurrent();
