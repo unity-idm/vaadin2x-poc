@@ -34,10 +34,10 @@ public class LoginView extends Composite<VerticalLayout> implements View {
 		Vaadin23Authentication retrieval =
 			(Vaadin23Authentication) Vaadin23WebAppContext.getCurrentWebAppAuthentications().iterator().next().getFirstFactorAuthenticators().iterator().next()
 			.getRetrieval();
-		Collection<Vaadin23Authentication.VaadinAuthenticationUI> uiInstance = retrieval.createUIInstance(LOGIN);
+		Collection<Vaadin23Authentication.Vaadin23AuthenticationUI> uiInstance = retrieval.createUIInstance(LOGIN);
 		uiInstance.forEach(x -> x.setAuthenticationCallback(authenticationCallback23));
 
-		getContent().add(uiInstance.stream().map(Vaadin23Authentication.VaadinAuthenticationUI::getComponent).toArray(Component[]::new));
+		getContent().add(uiInstance.stream().map(Vaadin23Authentication.Vaadin23AuthenticationUI::getComponent).toArray(Component[]::new));
 	}
 
 	class AuthenticationCallback23 implements Vaadin23Authentication.AuthenticationCallback {

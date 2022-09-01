@@ -13,7 +13,7 @@ public interface Vaadin23Authentication extends BindingAuthn {
 	String NAME = "web-vaadin23";
 
 
-	Collection<VaadinAuthenticationUI> createUIInstance(Context context);
+	Collection<Vaadin23AuthenticationUI> createUIInstance(Context context);
 
 	interface AuthenticationCallback {
 		void onStartedAuthentication();
@@ -25,7 +25,7 @@ public interface Vaadin23Authentication extends BindingAuthn {
 		AuthenticationTriggeringContext getTriggeringContext();
 	}
 
-	interface VaadinAuthenticationUI {
+	interface Vaadin23AuthenticationUI {
 		Component getComponent();
 
 		void setAuthenticationCallback(AuthenticationCallback var1);

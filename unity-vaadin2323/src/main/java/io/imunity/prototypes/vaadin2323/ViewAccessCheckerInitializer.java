@@ -31,7 +31,7 @@ public class ViewAccessCheckerInitializer implements VaadinServiceInitListener {
 			RouteConfiguration.forApplicationScope();
 		configuration.getAvailableRoutes().stream()
 			.map(RouteBaseData::getTemplate)
-			.filter(template -> !template.equals(LOGIN_VIEW_ROUTE) && !template.isBlank())
+			.filter(template -> !template.startsWith(LOGIN_VIEW_ROUTE) && !template.isBlank())
 			.map(template -> LOGIN_VIEW_ROUTE + "/" + template)
 			.forEach(template -> configuration.setRoute(template, LoginView.class));
 	}

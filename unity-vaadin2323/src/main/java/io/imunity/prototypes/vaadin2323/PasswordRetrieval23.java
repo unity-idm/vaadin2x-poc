@@ -104,10 +104,10 @@ public class PasswordRetrieval23 extends AbstractCredentialRetrieval<PasswordExc
 	}
 
 	@Override
-	public Collection<VaadinAuthenticationUI> createUIInstance(Context context)
+	public Collection<Vaadin23AuthenticationUI> createUIInstance(Context context)
 	{
 		return Collections.singleton(
-				new PasswordRetrievalUI(credEditorReg.getEditor(PasswordVerificator.NAME)));
+				new PasswordRetrievalUI23(credEditorReg.getEditor(PasswordVerificator.NAME)));
 	}
 
 	private class PasswordRetrievalComponent extends VerticalLayout
@@ -275,12 +275,12 @@ public class PasswordRetrieval23 extends AbstractCredentialRetrieval<PasswordExc
 		}
 	}
 	
-	private class PasswordRetrievalUI implements VaadinAuthenticationUI
+	private class PasswordRetrievalUI23 implements Vaadin23AuthenticationUI
 	{
 		private final PasswordRetrievalComponent theComponent;
 
 
-		public PasswordRetrievalUI(CredentialEditor credEditor)
+		public PasswordRetrievalUI23(CredentialEditor credEditor)
 		{
 			this.theComponent = new PasswordRetrievalComponent(credEditor);
 		}
