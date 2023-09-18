@@ -11,10 +11,12 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import org.vaadin.firitin.util.WebStorage;
 
 @Route("login")
 @PageTitle("Login")
+@AnonymousAllowed
 public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 	ComponentEventListener<AbstractLogin.LoginEvent> {
 
@@ -49,7 +51,13 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 		boolean authenticated = ExampleMockAuthenticationService.authenticate(
 			loginEvent.getUsername(), loginEvent.getPassword());
 		if (authenticated) {
-			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
+			WebStorage.getItem(
+				WebStorage.Storage.sessionStorage,
+				"redirect-url",
+				value -> {
+					UI.getCurrent().getPage().setLocation(value);
+				}
+			);
 		} else {
 			login.setError(true);
 		}

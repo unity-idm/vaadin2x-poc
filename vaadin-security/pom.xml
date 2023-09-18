@@ -18,8 +18,13 @@
 			<version>${vaadin.new.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>in.virit</groupId>
+			<artifactId>viritin</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
 		</dependency>
 	</dependencies>
 

@@ -5,10 +5,9 @@ import io.imunity.prototypes.common.VaadinWithSpringServlet;
 import io.imunity.prototypes.vaadin231.ResourceProvider231;
 import io.imunity.prototypes.vaadin232.ResourceProvider232;
 import jakarta.servlet.DispatcherType;
-import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.ee10.webapp.WebAppContext;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
-import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.util.EnumSet;
 
@@ -36,7 +35,7 @@ class Runner {
 		vaadin232webAppContext.addFilter(AuthenticationFilter.class, "*", EnumSet.of(DispatcherType.REQUEST));
 		vaadin232webAppContext.addServlet(VaadinWithSpringServlet.class, "/*");
 
-		contexts.setHandlers(new Handler[] {vaadin231webAppContext, vaadin232webAppContext});
+		contexts.setHandlers(vaadin231webAppContext, vaadin232webAppContext);
 
 		Server server = new Server(8080);
 		server.setHandler(contexts);

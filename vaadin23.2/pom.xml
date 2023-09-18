@@ -28,6 +28,10 @@
 			<artifactId>vaadin-elements</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>
