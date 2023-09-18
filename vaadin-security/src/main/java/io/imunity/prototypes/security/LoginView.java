@@ -11,6 +11,8 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinServlet;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import org.vaadin.firitin.util.WebStorage;
 
@@ -20,7 +22,7 @@ import org.vaadin.firitin.util.WebStorage;
 public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 	ComponentEventListener<AbstractLogin.LoginEvent> {
 
-	private LoginForm login = new LoginForm();
+	private final LoginForm login = new LoginForm();
 
 	public LoginView() {
 		addClassName("login-view");
@@ -44,6 +46,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 			.containsKey("error")) {
 			login.setError(true);
 		}
+		if(VaadinService.getCurrentRequest().isUserInRole("USER"))
+			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
 	}
 
 	@Override
@@ -54,9 +58,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 			WebStorage.getItem(
 				WebStorage.Storage.sessionStorage,
 				"redirect-url",
-				value -> {
-					UI.getCurrent().getPage().setLocation(value);
-				}
+				value -> UI.getCurrent().getPage().setLocation(value)
 			);
 		} else {
 			login.setError(true);
