@@ -1,55 +1,45 @@
 package io.imunity.prototypes.runner;
 
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import org.apache.http.auth.BasicUserPrincipal;
-import org.eclipse.jetty.security.DefaultUserIdentity;
-import org.eclipse.jetty.security.UserAuthentication;
-import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.ee10.servlet.ServletApiRequest;
+import org.eclipse.jetty.security.AuthenticationState;
+import org.eclipse.jetty.security.authentication.LoginAuthenticator;
+import org.eclipse.jetty.security.internal.DefaultUserIdentity;
 
 import javax.security.auth.Subject;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static java.util.Optional.ofNullable;
 
-public class AuthenticationFilter implements Filter {
+public class AuthenticationFilter implements Filter
+{
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig filterConfig)
+	{
 
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 		ServletException {
-		Request rq = (Request) request;
-
-		boolean authenticated = ofNullable(rq.getSession().getAttribute("authenticated"))
+		ServletApiRequest rq = (ServletApiRequest) request;
+		boolean authenticated = ofNullable(rq.getSession(true).getAttribute("authenticated"))
 			.map(attribute -> (boolean) attribute)
 			.orElse(false);
-		if(!authenticated)
-			blockRestoringLoginPageFromCashe((HttpServletResponse) response);
 		if(authenticated && rq.getUserPrincipal() == null){
-			UserAuthentication userAuthentication = new UserAuthentication("basic", new DefaultUserIdentity(
-				new Subject(),
-				new BasicUserPrincipal((String) rq.getSession().getAttribute("login")),
-				new String[]{"USER"})
-			);
-			rq.setAuthentication(userAuthentication);
+			AuthenticationState.setAuthenticationState(rq.getRequest(), new LoginAuthenticator.UserAuthenticationSucceeded(
+				"basic", new DefaultUserIdentity(
+					new Subject(), new BasicUserPrincipal((String) rq.getSession().getAttribute("login")), new String[]{"USER"}
+			)
+			));
 		}
 		chain.doFilter(request, response);
 	}
 
-	private void blockRestoringLoginPageFromCashe(HttpServletResponse response) {
-		response.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	}
-
-	@Override
-	public void destroy() {
-
-	}
 }

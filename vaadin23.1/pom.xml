@@ -12,8 +12,6 @@
 	<artifactId>vaadin23.1</artifactId>
 
 	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
 		<vaadin.productionMode>true</vaadin.productionMode>
 	</properties>
 	<packaging>jar</packaging>
@@ -25,6 +23,16 @@
 			<artifactId>vaadin-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>io.imunity.prototypes</groupId>
 			<artifactId>vaadin-common</artifactId>
 			<version>1.0-SNAPSHOT</version>
@@ -33,10 +41,6 @@
 			<groupId>io.imunity.prototypes</groupId>
 			<artifactId>vaadin-elements</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -11,21 +11,20 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+import org.vaadin.firitin.util.WebStorage;
 
 @Route("login")
 @PageTitle("Login")
+@AnonymousAllowed
 public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 	ComponentEventListener<AbstractLogin.LoginEvent> {
 
-	private LoginForm login = new LoginForm();
+	private final LoginForm login = new LoginForm();
 
 	public LoginView() {
-		if(ExampleMockAuthenticationService.isAuthenticated()) {
-			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
-			return;
-		}
-
 		addClassName("login-view");
 		setSizeFull();
 
@@ -47,6 +46,8 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 			.containsKey("error")) {
 			login.setError(true);
 		}
+		if(VaadinService.getCurrentRequest().isUserInRole("USER"))
+			UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
 	}
 
 	@Override
@@ -54,13 +55,13 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver,
 		boolean authenticated = ExampleMockAuthenticationService.authenticate(
 			loginEvent.getUsername(), loginEvent.getPassword());
 		if (authenticated) {
-			redirectToMainView();
+			WebStorage.getItem(
+				WebStorage.Storage.sessionStorage,
+				"redirect-url",
+				value -> UI.getCurrent().getPage().setLocation(value)
+			);
 		} else {
 			login.setError(true);
 		}
-	}
-
-	private void redirectToMainView() {
-		UI.getCurrent().getPage().setLocation(VaadinServlet.getCurrent().getServletContext().getContextPath());
 	}
 }

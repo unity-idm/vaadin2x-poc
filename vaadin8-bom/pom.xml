@@ -11,7 +11,6 @@
 	<description>Vaadin Framework (Bill of Materials)</description>
 
 	<properties>
-		<vaadin.spring.version>3.2.1</vaadin.spring.version>
 		<vaadin.testbench.version>5.2.0</vaadin.testbench.version>
 		<vaadin.cdi.version>3.0.1</vaadin.cdi.version>
 		<vaadin.context-menu.version>3.1.0</vaadin.context-menu.version>
@@ -93,21 +92,6 @@
 			</dependency>
 
 			<!-- Add-on Dependencies -->
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring-boot-starter</artifactId>
-				<version>${vaadin.spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring-boot</artifactId>
-				<version>${vaadin.spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring</artifactId>
-				<version>${vaadin.spring.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-testbench-core</artifactId>

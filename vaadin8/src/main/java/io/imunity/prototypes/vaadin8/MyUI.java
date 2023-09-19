@@ -3,8 +3,11 @@ package io.imunity.prototypes.vaadin8;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.DeploymentConfiguration;
+import com.vaadin.server.ServiceException;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
@@ -37,5 +40,11 @@ public class MyUI extends UI {
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 	@VaadinServletConfiguration(ui = MyUI.class, productionMode = true)
 	public static class MyUIServlet extends VaadinServlet {
+		@Override
+		protected VaadinServletService createServletService(DeploymentConfiguration deploymentConfiguration) throws ServiceException {
+			VaadinServletService service = new VaadinServletServiceWithoutAtmosphere(this, deploymentConfiguration);
+			service.init();
+			return service;
+		}
 	}
 }

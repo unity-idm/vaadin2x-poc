@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -19,11 +20,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.stream;
 
 public abstract class CustomResourceProvider implements ResourceProvider {
 	private final Map<String, CachedStreamData> cache = new ConcurrentHashMap<>();
 	private final Set<String> chosenClassPathElement;
+	private final Set<String> chosenClassPathElementForJetty;
 
 	public CustomResourceProvider(String... chosenModules) throws URISyntaxException {
 		String currentClassPathElement = getClass()
@@ -40,10 +42,30 @@ public abstract class CustomResourceProvider implements ResourceProvider {
 
 		classPathElements.add(currentClassPathElement);
 		this.chosenClassPathElement = classPathElements;
+		this.chosenClassPathElementForJetty = classPathElements.stream()
+			.map(CustomResourceProvider::getUrlCompatibleWithJetty)
+			.collect(Collectors.toSet());
 	}
 
 	public Set<String> getChosenClassPathElement() {
-		return chosenClassPathElement;
+		return chosenClassPathElementForJetty;
+	}
+
+	public static String getUrlCompatibleWithJetty(String vale) {
+		URL url;
+		try
+		{
+			url = new URL(vale);
+		} catch (MalformedURLException e)
+		{
+			throw new RuntimeException(e);
+		}
+		StringBuilder strForm = new StringBuilder();
+		String protocol = url.getProtocol();
+		strForm.append(protocol);
+		strForm.append("://");
+		strForm.append(url.getFile());
+		return strForm.toString();
 	}
 
 	@Override
